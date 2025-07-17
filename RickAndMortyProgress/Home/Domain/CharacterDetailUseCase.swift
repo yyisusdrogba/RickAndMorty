@@ -8,8 +8,12 @@
 import Foundation
 import Combine
 
-class CharacterDetailUseCase {
-    let repository: RickAndMortyCharacterRepository = RickAndMortyCharacterRepository()
+class CharacterDetailUseCase: CharacterDetailUseCaseProtocol {
+    let repository: RickAndMortyCharacterRepositoryProtocol
+    
+    init(repository: RickAndMortyCharacterRepositoryProtocol) {
+        self.repository = repository
+    }
     
     func execute(id: Int) -> AnyPublisher <CharacterAndEpisodeModel,Error> {
         repository.getCharacter(id: id)

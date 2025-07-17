@@ -9,10 +9,15 @@ import SwiftUI
 
 struct CharacterDetail: View {
     
-    @StateObject var viewModel = CharacterDetailViewModel()
+    @ObservedObject var viewModel: CharacterDetailViewModel
     @State private var favoriteStatus: Bool = false
 
     var id: Int
+    
+    init(viewModel: CharacterDetailViewModel, id: Int) {
+        self.viewModel = viewModel
+        self.id = id
+    }
     
     var body: some View {
         
@@ -70,5 +75,5 @@ struct CharacterDetail: View {
 }
 
 #Preview {
-    CharacterDetail(id: 1)
+    CharacterDetail(viewModel: )
 }

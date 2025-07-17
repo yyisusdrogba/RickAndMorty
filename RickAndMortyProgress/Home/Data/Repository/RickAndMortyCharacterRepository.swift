@@ -8,9 +8,13 @@
 import Foundation
 import Combine
 
-class RickAndMortyCharacterRepository {
+class RickAndMortyCharacterRepository: RickAndMortyCharacterRepositoryProtocol {
     
-    var apiDataManager: RickAndMortyCharactersAPIDataManager = RickAndMortyCharactersAPIDataManager()
+    var apiDataManager: RickAndMortyCharactersAPIDataManagerProtocol
+    
+    init(apiDataManager: RickAndMortyCharactersAPIDataManagerProtocol) {
+        self.apiDataManager = apiDataManager
+    }
     
     func getCharacters(currentPage: String) -> AnyPublisher<[RickAndMortyCharacter], Error> {
         apiDataManager.requestAllCharacters(currentPage: currentPage)

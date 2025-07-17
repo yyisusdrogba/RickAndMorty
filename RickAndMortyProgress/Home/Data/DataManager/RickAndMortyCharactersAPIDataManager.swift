@@ -8,7 +8,14 @@
 import Foundation
 import Combine
 
-class RickAndMortyCharactersAPIDataManager {
+class RickAndMortyCharactersAPIDataManager: RickAndMortyCharactersAPIDataManagerProtocol {
+    
+    var coreDataManager: FavoriteCoreDataManagerProtocol
+    
+    init(coreDataManager: FavoriteCoreDataManagerProtocol) {
+        self.coreDataManager = coreDataManager
+    }
+    
     //MARK: Request API'S
     func requestAllCharacters (currentPage: String) -> AnyPublisher<[RickAndMortyCharacter],Error> {
         let url = URL(string: "https://rickandmortyapi.com/api/character?page=\(currentPage)")!
@@ -81,8 +88,7 @@ class RickAndMortyCharactersAPIDataManager {
     
     //MARK: Core Data
     func saveCharactersToCoreData(character: CharacterModel) {
-        let coreData = FavoriteCoreDataManager()
-        coreData.saveCharacter(character: character)
+        coreDataManager.saveCharacter(character: character)
     }
 }
 

@@ -8,9 +8,13 @@
 import Foundation
 import Combine
 
-class RickAndMortyCharacterUseCase {
+class RickAndMortyCharacterUseCase: RickAndMortyCharacterUseCaseProtocol {
     
-    var repository: RickAndMortyCharacterRepository = RickAndMortyCharacterRepository()
+    var repository: RickAndMortyCharacterRepositoryProtocol
+    
+    init(repository: RickAndMortyCharacterRepositoryProtocol) {
+        self.repository = repository
+    }
     
     //Prueba de execute para filtros
     func execute(species: String, name: String, status: String, currentPage: String) -> AnyPublisher<[RickAndMortyCharacter],Error> {

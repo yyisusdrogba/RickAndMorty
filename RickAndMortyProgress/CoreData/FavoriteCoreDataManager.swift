@@ -10,7 +10,7 @@ import CoreData
 import Combine
 
 
-class FavoriteCoreDataManager: ObservableObject {
+class FavoriteCoreDataManager: ObservableObject, FavoriteCoreDataManagerProtocol {
     
     let container: NSPersistentContainer
     

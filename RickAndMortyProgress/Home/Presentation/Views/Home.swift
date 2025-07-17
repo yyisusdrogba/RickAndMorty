@@ -9,8 +9,12 @@ import SwiftUI
 
 struct Home: View {
     @State private var characterSearch: String = ""
-    @StateObject var viewModel = RickAndMortyHomeViewModel()
+    @ObservedObject var viewModel: RickAndMortyHomeViewModel
     @FocusState private var characterIsFocused: Bool
+    
+    init(viewModel: RickAndMortyHomeViewModel) {
+        self.viewModel = viewModel
+    }
     
     var body: some View {
         NavigationView {
