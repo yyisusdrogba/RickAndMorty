@@ -7,13 +7,14 @@
 
 import Foundation
 import Combine
+import Resolver
 
 class CharacterDetailUseCase: CharacterDetailUseCaseProtocol {
-    let repository: RickAndMortyCharacterRepositoryProtocol
+    @Injected var repository: RickAndMortyCharacterRepositoryProtocol
     
-    init(repository: RickAndMortyCharacterRepositoryProtocol) {
-        self.repository = repository
-    }
+//    init(repository: RickAndMortyCharacterRepositoryProtocol) {
+//        self.repository = repository
+//    }
     
     func execute(id: Int) -> AnyPublisher <CharacterAndEpisodeModel,Error> {
         repository.getCharacter(id: id)

@@ -7,14 +7,15 @@
 
 import Foundation
 import Combine
+import Resolver
 
 class RickAndMortyCharactersAPIDataManager: RickAndMortyCharactersAPIDataManagerProtocol {
     
-    var coreDataManager: FavoriteCoreDataManagerProtocol
+    @Injected var coreDataManager: FavoriteCoreDataManagerProtocol
     
-    init(coreDataManager: FavoriteCoreDataManagerProtocol) {
-        self.coreDataManager = coreDataManager
-    }
+//    init(coreDataManager: FavoriteCoreDataManagerProtocol) {
+//        self.coreDataManager = coreDataManager
+//    }
     
     //MARK: Request API'S
     func requestAllCharacters (currentPage: String) -> AnyPublisher<[RickAndMortyCharacter],Error> {

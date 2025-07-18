@@ -6,17 +6,19 @@
 //
 
 import SwiftUI
+import Resolver
 
 struct CharacterDetail: View {
     
-    @ObservedObject var viewModel: CharacterDetailViewModel
+    @StateObject var viewModel: CharacterDetailViewModel
     @State private var favoriteStatus: Bool = false
 
     var id: Int
     
-    init(viewModel: CharacterDetailViewModel, id: Int) {
-        self.viewModel = viewModel
+    init(id: Int) {
         self.id = id
+        let useaCase = Resolver.resolve(CharacterDetailUseCaseProtocol.self)
+        _viewModel = StateObject(wrappedValue: CharacterDetailViewModel(useCase: useaCase))
     }
     
     var body: some View {
@@ -75,5 +77,5 @@ struct CharacterDetail: View {
 }
 
 #Preview {
-    CharacterDetail(viewModel: )
+    CharacterDetail(id: 1)
 }
