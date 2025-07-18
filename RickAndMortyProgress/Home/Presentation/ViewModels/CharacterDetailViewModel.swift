@@ -11,7 +11,7 @@ import _MapKit_SwiftUI
 
 class CharacterDetailViewModel: ObservableObject {
     
-    let useCase = CharacterDetailUseCase()
+    var useCase: CharacterDetailUseCaseProtocol
     @Published var characterDetail =  CharacterAndEpisodeModel(character: CharacterModel(name: "", image: "", gender: "", species: "", status: "", episode: [""], location: LocationCharacter(name: "")), episodes: [EpisodesModel(id: 0, name: "", episode: "", air_date: "")])
     private var cancellable = Set<AnyCancellable>()
     @Published var position: MapCameraPosition
@@ -19,18 +19,18 @@ class CharacterDetailViewModel: ObservableObject {
     var coordinate: CLLocationCoordinate2D
     var timer: Timer?
     
-    init() {
+    init(useCase: CharacterDetailUseCaseProtocol) {
+        self.useCase = useCase
         coordinate = CLLocationCoordinate2D(latitude: Double.random(in: 19.4326...19.6000), longitude: -99.1332)
         position = .camera(MapCamera(centerCoordinate: coordinate, distance: 500, heading: 0, pitch: 0))
         
         timer = Timer.scheduledTimer(withTimeInterval: 6, repeats: true) { _ in
             self.moveLocation()
         }
-        
     }
     
     func getDetailCharacter(id: Int) {
-        useCase.repository.getCharacter(id: id)
+        useCase.execute(id: id)
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {

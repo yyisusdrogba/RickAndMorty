@@ -9,16 +9,21 @@ import SwiftUI
 
 struct RickAndMortyHub: View {
     
-    let coreDataManager: FavoriteCoreDataManager
+//    let coreDataManager: FavoriteCoreDataManager
+//    
+//    init() {
+//        coreDataManager = FavoriteCoreDataManager()
+//    }
+    let home: Home
     
-    init() {
-        coreDataManager = FavoriteCoreDataManager()
+    init(home: Home) {
+        self.home = home
     }
     
     var body: some View {
         TabView {
             Tab("Home", systemImage: "house.fill") {
-                Home()
+                home
             }
             Tab("Favorite", systemImage: "star.fill") {
                 FavoriteView()
@@ -29,6 +34,6 @@ struct RickAndMortyHub: View {
     }
 }
 
-#Preview {
-    RickAndMortyHub()
-}
+//#Preview {
+//    RickAndMortyHub(home: <#Home#>)
+//}

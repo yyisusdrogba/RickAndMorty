@@ -7,10 +7,15 @@
 
 import Foundation
 import Combine
+import Resolver
 
-class RickAndMortyCharacterUseCase {
+class RickAndMortyCharacterUseCase: RickAndMortyCharacterUseCaseProtocol {
     
-    var repository: RickAndMortyCharacterRepository = RickAndMortyCharacterRepository()
+    @Injected var repository: RickAndMortyCharacterRepositoryProtocol
+    
+//    init(repository: RickAndMortyCharacterRepositoryProtocol) {
+//        self.repository = repository
+//    }
     
     //Prueba de execute para filtros
     func execute(species: String, name: String, status: String, currentPage: String) -> AnyPublisher<[RickAndMortyCharacter],Error> {

@@ -6,13 +6,20 @@
 //
 
 import SwiftUI
+import Resolver
 
 struct CharacterDetail: View {
     
-    @StateObject var viewModel = CharacterDetailViewModel()
+    @StateObject var viewModel: CharacterDetailViewModel
     @State private var favoriteStatus: Bool = false
 
     var id: Int
+    
+    init(id: Int) {
+        self.id = id
+        let useaCase = Resolver.resolve(CharacterDetailUseCaseProtocol.self)
+        _viewModel = StateObject(wrappedValue: CharacterDetailViewModel(useCase: useaCase))
+    }
     
     var body: some View {
         

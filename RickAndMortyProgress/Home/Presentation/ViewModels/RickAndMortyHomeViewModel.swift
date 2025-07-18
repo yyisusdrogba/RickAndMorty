@@ -8,11 +8,11 @@
 import Foundation
 import Combine
 
-class RickAndMortyHomeViewModel: ObservableObject {
-    
+final class RickAndMortyHomeViewModel: ObservableObject {
+   
     private var cancellable = Set<AnyCancellable>()
     @Published var charactersArray = [RickAndMortyCharacter]()
-    private var rickAndMortyUseCase = RickAndMortyCharacterUseCase()
+    private var rickAndMortyUseCase: RickAndMortyCharacterUseCaseProtocol
     @Published var species = ""
     @Published var status = ""
     @Published var name = ""
@@ -20,6 +20,10 @@ class RickAndMortyHomeViewModel: ObservableObject {
         didSet {
             self.getAllCharacters(currentPage: String(currentPage))
         }
+    }
+    
+    init(rickAndMortyUseCase: RickAndMortyCharacterUseCaseProtocol) {
+        self.rickAndMortyUseCase = rickAndMortyUseCase
     }
     
     func getAllCharacters(currentPage: String, characterSearch: String? = nil) {

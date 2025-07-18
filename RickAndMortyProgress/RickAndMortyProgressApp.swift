@@ -6,12 +6,21 @@
 //
 
 import SwiftUI
+import Resolver
 
 @main
 struct RickAndMortyProgressApp: App {
+    
+    init(){
+        Resolver.registerAllServices()
+    }
+    
     var body: some Scene {
         WindowGroup {
-            RickAndMortyHub()
+            Home()
         }
     }
 }
+
+ 
+

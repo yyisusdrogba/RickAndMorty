@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import Resolver
 
 struct Home: View {
     @State private var characterSearch: String = ""
-    @StateObject var viewModel = RickAndMortyHomeViewModel()
+    @ObservedObject var viewModel: RickAndMortyHomeViewModel = Resolver.resolve()
     @FocusState private var characterIsFocused: Bool
     
     var body: some View {
